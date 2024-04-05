@@ -19,8 +19,8 @@ db.connect((err) => {
 });
 
 app.post('/signup', (req, res) => {
-    const user = { username: req.body.username, password: req.body.password, isAdmin: req.body.isAdmin, isLogin: req.body.isLogin, email: req.body.email };
-    db.query('INSERT INTO users SET ?', user, (err, result) => {
+    const user = { name: req.body.username, password: req.body.password, isAdmin: req.body.isAdmin, isLogin: req.body.isLogin, email: req.body.email };
+    db.query('INSERT INTO student_info SET ?', user, (err, result) => {
         if (err) {
             console.error("Database error:", err);
             return res.status(500).json({ success: false, message: 'Internal server error' });
@@ -28,17 +28,17 @@ app.post('/signup', (req, res) => {
         res.status(201).send('User created');
     });
 });
-let studentId = "";
+let email = "";
 app.post('/login', (req, res) => {
-    db.query('SELECT * FROM users WHERE username = ? AND password = ?', [req.body.username, req.body.password], (err, results) => {
+    db.query('SELECT * FROM student_info WHERE email = ? AND password = ?', [req.body.email, req.body.password], (err, results) => {
         if (err) {
             console.error("Database error:", err);
             return res.status(500).json({ success: false, message: 'Internal server error' });
         }
         if (results.length > 0) {
-            studentId = req.body.username; 
+            email = req.body.email; 
 
-            let sql = `UPDATE users SET isLogin = true WHERE username = '${studentId}'`;
+            let sql = `UPDATE student_info SET isLogin = true WHERE email = '${email}'`;
             db.query(sql, (err, result) => {
                 if (err) throw err;
                 console.log('isLogin set to true successfully.');
@@ -47,6 +47,19 @@ app.post('/login', (req, res) => {
             return res.status(200).json({ success: true, message: 'Logged in' });
         } else {
             return res.status(401).json({ success: false, message: 'Incorrect username or password' });
+        }
+    });
+});
+app.post('/isAdmin', (req, res) => {
+    db.query('SELECT * FROM student_info WHERE email = ? AND isAdmin = true', [req.body.email], (err, results) => {
+        if (err) {
+            console.error("Database error:", err);
+            return res.status(500).json({ success: false, message: 'Internal server error' });
+        }
+        if (results.length > 0) {
+            return res.status(200).json({ success: true, message: 'It is admin' });
+        } else {
+            return res.status(401).json({ success: false, message: 'Not admin' });
         }
     });
 });
