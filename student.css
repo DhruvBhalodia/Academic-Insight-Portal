@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  ul li {
+    padding: 15px 20px;
+  }
+  
+  ul li a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+  }
+  
+  ul li a:hover {
+    color: #ddd;
+  }
+  
+  .underline {
+    position: relative;
+    height: 3px;
+    background-color: #fff;
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+  
+  .active {
+    color: #fff;
+  }
+  
+  .active ~ .underline {
+    width: 100px; /* Change this to the initial width of the underline */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .content {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: left 0.5s ease;
+    margin-top: 30px;
+    color: black;
+  }
+  
+  .content.active {
+    left: 0;
+    transition: width 0.3s ease, left 0.3s ease;
+  }

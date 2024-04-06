@@ -1,11 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Page</title>
+    <link rel="stylesheet" href="student.css">
 </head>
+
 <body>
-    <p>Student</p>
+    <nav>
+        <ul>
+            <li class="initial"><a href="#" class="active" data-target="home">Home</a></li>
+            <li><a href="#" data-target="about">About</a></li>
+            <li><a href="#" data-target="services">Services</a></li>
+            <li><a href="#" data-target="contact">Contact</a></li>
+        </ul>
+        <div class="underline"></div>
+    </nav>
+
+    <div class="content active" id="home">
+        <h2>Home Content</h2>
+        <p>This is the home page content.</p>
+    </div>
+
+    <div class="content" id="about">
+        <h2>About Content</h2>
+        <p>This is the about page content.</p>
+    </div>
+
+    <div class="content" id="services">
+        <h2>Services Content</h2>
+        <p>This is the services page content.</p>
+    </div>
+
+    <div class="content" id="contact">
+        <h2>Contact Content</h2>
+        <p>This is the contact page content.</p>
+    </div>
+
+    <script src="student.js"></script>
 </body>
+
 </html>
